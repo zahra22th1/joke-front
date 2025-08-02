@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Joke Generator</title>
+    <link rel="stylesheet" href="styles.css"  />
+  </head>
+  <body>
+    <div class="container">
+      <h1>جک تصادفی ساز</h1>
+      <div id="jokeContainer" class="joke-container">
+        <p>بیا روحیت عوض بشه</p>
+      </div>
+      
+      <button id="getJokeBtn" class="btn">
+        دریافت جوک جدید
+      </button> 
+    </div>
+  </div>
+</button>
+    </div>
+   <script>
+  const jokeContainer = document.getElementById("jokeContainer");
+  const getJokeBtn = document.getElementById("getJokeBtn");
+
+  getJokeBtn.addEventListener("click", async () => {
+    const joke = await fetchJoke();
+    jokeContainer.innerHTML = `<p>${joke}</p>`;
+  });
+
+  async function fetchJoke() {
+  try {
+    const response = await fetch("https://joke-backend-u808.onrender.com/api/joke");
+    const data = await response.json();
+    return data.joke; // چون فیلدش joke هست
+  } catch (error) {
+    console.error("Error fetching joke:", error);
+    return "اوپس! نتونستم جوکی بگیرم 😞";
+  }
+}
+
+</script>
